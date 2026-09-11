@@ -186,15 +186,21 @@ That command creates `dist-hostinger/` with:
 - `app/` — the production web app build
 - `.htaccess` — Apache rewrite rules for SPA routing
 - `index.php` — front controller for static file serving + SPA fallback
+- `api/index.php` — PHP backend for `/api/*` routes (with upstream proxy mode)
+- `api/config.php` — backend configuration (`GEV_API_BACKEND_BASE_URL`, timeout)
 
 Upload the **contents** of `dist-hostinger/` into your Hostinger `public_html/`
 directory.
 
+The built-in PHP backend supports core public endpoints (`/api/overpass`,
+`/api/opensky`, `/api/opensky-track`, `/api/adsblol/mil`,
+`/api/adsblol/trace`, `/api/celestrak/active`, `/api/launches`) and returns
+`{"hasKey":false}` for `/api/tomtom/status` (simulation mode).
+
 > [!IMPORTANT]
-> This shared-host package is for static client deployment. The Vite dev server
-> backend (`/api/*` proxy routes) is not included in shared PHP hosting mode.
-> Endpoints under `/api/*` return `501` until you connect a compatible backend
-> behind `/api`.
+> Full parity with the Vite Node backend still requires an upstream backend.
+> Set `GEV_API_BACKEND_BASE_URL` (or edit `api/config.php`) to forward all
+> `/api/*` requests to your full backend.
 
 ---
 

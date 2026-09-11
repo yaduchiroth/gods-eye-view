@@ -10,16 +10,6 @@ if ($relativePath === '') {
     $relativePath = 'index.html';
 }
 
-if (str_starts_with($relativePath, 'api/')) {
-    http_response_code(501);
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode([
-        'error' => 'API backend not configured for this Hostinger static package.',
-        'hint' => 'Use this package for static client hosting or place a compatible backend behind /api.',
-    ], JSON_UNESCAPED_SLASHES);
-    exit;
-}
-
 $sanitizedPath = str_replace(['../', '..\\'], '', $relativePath);
 $target = realpath($appDir . '/' . $sanitizedPath);
 $appReal = realpath($appDir);
