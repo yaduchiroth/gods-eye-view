@@ -37,6 +37,7 @@
     "dev:secure": "./scripts/dev-secure.sh",
     "opensky:import": "./scripts/opensky-import-client.sh",
     "build": "vite build",
+    "build:hostinger": "node scripts/build-hostinger-package.mjs",
     "preview": "vite preview",
     "test": "node scripts/run-unit-tests.mjs",
     "test:track": "node scripts/track-regression.mjs",

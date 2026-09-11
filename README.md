@@ -171,6 +171,31 @@ requests only from your machine. Browser-side keys (Google Maps, Cesium ion)
 must be restricted at their providers — [SECURITY.md](SECURITY.md) shows how,
 and it carries the LAN-sharing rules alongside [Keys & Costs](#-api-keys).
 
+### 🌐 Deploy on Hostinger shared hosting (PHP/HTML upload)
+
+This repo ships with a Hostinger-ready export that packages the Vite build into
+an uploadable `public_html` bundle.
+
+```bash
+npm ci
+npm run build:hostinger
+```
+
+That command creates `dist-hostinger/` with:
+
+- `app/` — the production web app build
+- `.htaccess` — Apache rewrite rules for SPA routing
+- `index.php` — front controller for static file serving + SPA fallback
+
+Upload the **contents** of `dist-hostinger/` into your Hostinger `public_html/`
+directory.
+
+> [!IMPORTANT]
+> This shared-host package is for static client deployment. The Vite dev server
+> backend (`/api/*` proxy routes) is not included in shared PHP hosting mode.
+> Endpoints under `/api/*` return `501` until you connect a compatible backend
+> behind `/api`.
+
 ---
 
 ## 🕐 The First Five Minutes
